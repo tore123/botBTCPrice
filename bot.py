@@ -3,16 +3,16 @@ from config import *
 
 import telebot
 
-import recolector
+from recolector import *
 
 
-btc = recolector.getCoinDesk()
+bot = telebot.TeleBot(token)
 
-bot = telebot.TeleBot(token) 
 
-@bot.message_handler(commands=[command]) 
+@bot.message_handler(commands=[command])
 def command_start(user):
-    value = btc.getCurrentPrice() 
-    bot.send_message(user.chat.id, round(value,decimals))
+    value = takeValue()
+    bot.send_message(user.chat.id, round(value, decimals))
+
 
 bot.polling()
